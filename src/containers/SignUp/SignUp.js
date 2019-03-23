@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 
 import { Button, Divider, Form, Grid, Segment, Select } from 'semantic-ui-react'
 
+
 class SignUp extends Component {
     constructor(props){
         super(props);
         this.state = {
             username: "",
             password: "",
-            roleValue: "",
-            roleOptions: [{key: 'Reviewer', value: '1', text: 'Reviewer'}, {name: 'Owner', value: '2', text: 'Owner'}]
+            roleValue: 0,
+            message: "",
+            error: false,
+            roleOptions: [{key: 'Reviewer', value: '1', text: 'Reviewer'}, {key: 'Owner', value: '2', text: 'Owner'}]
         }
     }
 
@@ -17,30 +20,53 @@ class SignUp extends Component {
         this.props.history.replace('/signIn');
     }
 
-    onRolePick = (e, {value}) => {
-        e.persist();
-        this.setState({roleValue: value});
-        console.log(this.state.roleValue);
+     onRolePick = (e, {value}) => {
+      this.setState({roleValue: value});
+      console.log(value);
     };
+
+    handleSubmit = (event) => { 
+      event.preventDefault();
+      fetch('https://review-website-api.herokuapp.com/user/create', {
+       method: 'post',
+       headers: {'Content-Type':'application/json'},
+       body: JSON.stringify({
+        "username": this.state.username,
+        "password": this.state.password,
+        "email": this.state.email,
+        "role": this.state.roleValue,
+        "active": 1
+       })
+      })
+      .then((res) => {
+          if(res.status === 201){
+              this.setState({message: "Registred completed"})
+          }else{
+              this.setState({message: "The username or email is already in use"})
+          }
+      })
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+     };
     
 
   render() {
+    
     return (
       <Segment placeholder>
       <h1>Sign up</h1>
       <Grid columns={2} relaxed='very' stackable>
         <Grid.Column>
-          <Form>
-            <Form.Input icon='user' iconPosition='left' label='Username' placeholder='Username' />
-            <Form.Input icon='envelope outline' iconPosition='left' placeholder='Email' label='Email' type='Email' />
-            <Form.Input icon='lock' iconPosition='left' label='Password' placeholder='Password' type='password' />
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Input value={this.state.userName} onChange={(event) => this.setState({username: event.target.value})} icon='user' iconPosition='left' label='Username' placeholder='Username' />
+            <Form.Input value={this.state.email} onChange={(event) => this.setState({email: event.target.value})} icon='envelope outline' iconPosition='left' placeholder='Email' label='Email' type='Email' />
+            <Form.Input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})} icon='lock' iconPosition='left' label='Password' placeholder='Password' type='password' />
             <h5>Role</h5>
             <Select onChange={this.onRolePick} placeholder='Select your role' label='Role' options={this.state.roleOptions} />
-            
-            <Button content='Login' primary />
+            <Button onClick={this.handleSubmit} content='Login' primary />
+                <p>{this.state.message}</p>
           </Form>
         </Grid.Column>
-  
         <Grid.Column verticalAlign='middle'>
           <Button onClick={this.onButtonClick} content='Sign In' icon='signup' size='big' />
         </Grid.Column>
