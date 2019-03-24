@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Form } from 'semantic-ui-react'
 
-class UpdateOwner extends Component {
+class CreateRestaurants extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -10,6 +10,7 @@ class UpdateOwner extends Component {
             postcode: '',
             category: '',
             description: '',
+            message: ''
         }
     }
 
@@ -36,7 +37,11 @@ class UpdateOwner extends Component {
           body: JSON.stringify(data)
         })
           .then(res => {
-            return res.json();
+            if(res.status === 201){
+              this.setState({message: 'Created restaurant'});
+          }else{
+              this.setState({message: 'Something went wrong'})
+          }
           })
           .then(data => console.log(data))
           .catch(err => console.log(err));
@@ -51,9 +56,10 @@ class UpdateOwner extends Component {
                 <Form.Input value={this.state.category} onChange={(event) => this.setState({category: event.target.value})} icon='tags' iconPosition='left' label='Category' placeholder='category' />
                 <Form.Input value={this.state.description} onChange={(event) => this.setState({description: event.target.value})} icon='book' iconPosition='left' label='Description' placeholder='description' />
             <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
+            <p>{this.state.message}</p>
           </Form>
         )
     }
 }
 
-export default UpdateOwner;
+export default CreateRestaurants;

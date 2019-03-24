@@ -4,12 +4,11 @@ import SignIn from './containers/SignIn/SingIn';
 import SignUp from './containers/SignUp/SignUp';
 import UserDashBoard from './containers/User/UserDashBoard';
 import OwnerDashboard from './containers/Owner/OwnerDashboard';
-import UpdateOwner from './containers/Owner/OwnerDashboardItems/UpdateOwner';
+import CreateRestaurants from './containers/Owner/OwnerDashboardItems/CreateRestaurants';
 
 import { Menu } from 'semantic-ui-react'
 import {Route} from 'react-router';
 import {BrowserRouter, Link} from 'react-router-dom';
-
 
 class App extends Component {
   constructor(props){
@@ -124,7 +123,7 @@ class App extends Component {
       <Route exact path="/signUp" render={(props) => <SignUp {...props}  />} />
       <Route exact path="/userDashboard" render={(props) => <UserDashBoard {...props} getData={this.getData} />} />
       <Route exact path="/ownerDashboard" render={(props) => <OwnerDashboard {...props}  getData={this.getData}/>} />
-      <Route exact path="/ownerDashboard/updateOwner" render={(props) => <UpdateOwner {...props}  getData={this.getData}/>} />
+      <Route exact path="/ownerDashboard/CreateRestaurants" render={(props) => <CreateRestaurants {...props}  getData={this.getData}/>} />
       </div>
     </div>
     </BrowserRouter>

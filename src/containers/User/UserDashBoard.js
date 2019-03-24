@@ -21,7 +21,6 @@ class UserDashBoard extends Component{
           return results.json();
         }).then(data => {
           this.setState({data});
-          console.log(this.state.data);
         }).catch(err => {
           console.log(err);
         });

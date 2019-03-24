@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import { Tab } from 'semantic-ui-react';
 
-import UpdateOwner from '../Owner/OwnerDashboardItems/UpdateOwner';
+import CreateRestaurants from './OwnerDashboardItems/CreateRestaurants';
 
 class OwnerDashboard extends Component{
     constructor(props){
@@ -32,7 +32,7 @@ class OwnerDashboard extends Component{
 
     render(){
         const panes = [
-            { menuItem: 'Create new Restaurant', render: () => <Tab.Pane><UpdateOwner data={this.state.data} /></Tab.Pane> },
+            { menuItem: 'Create new Restaurant', render: () => <Tab.Pane><CreateRestaurants data={this.state.data} /></Tab.Pane> },
             { menuItem: 'Your restaurants', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
             { menuItem: 'Recent Reviews', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
           ]
