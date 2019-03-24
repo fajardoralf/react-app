@@ -82,9 +82,10 @@ class App extends Component {
       </Menu.Item>
       
       <Menu.Item
-      name='Log out'
+      as={Link} to='/signIn'
+      name='Log Out'
       active={activeItem === 'Log out'}
-      onClick={this.handleItemClick}
+      onClick={this.handleLogOut}
     >
     </Menu.Item>
     </Menu>
