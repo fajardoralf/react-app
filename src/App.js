@@ -7,6 +7,7 @@ import Home from './containers/Home/Home'
 import UserDashBoard from './containers/User/UserDashBoard';
 import OwnerDashboard from './containers/Owner/OwnerDashboard';
 import CreateRestaurants from './containers/Owner/OwnerDashboardItems/CreateRestaurants';
+import Restaurants from './containers/Restaurant/Restaurant';
 
 import { Menu, Container } from 'semantic-ui-react'
 import {Route} from 'react-router';
@@ -65,6 +66,7 @@ class App extends Component {
     </Menu.Item>
 
     <Menu.Item
+      as={Link} to='/restaurants' 
       name='Restaurants'
       active={activeItem === 'Restaurants'}
       onClick={this.handleItemClick}
@@ -131,6 +133,7 @@ class App extends Component {
       <Route exact path="/signIn" render={(props) => <SignIn {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/signUp" render={(props) => <SignUp {...props}  />} />
       <Route exact path="/" render={(props) => <Home {...props} handleChanged={this.handleChanged} />} />
+      <Route exact path="/restaurants" render={(props) => <Restaurants {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/userDashboard" render={(props) => <UserDashBoard {...props} getData={this.getData} />} />
       <Route exact path="/ownerDashboard" render={(props) => <OwnerDashboard {...props}  getData={this.getData}/>} />
       <Route exact path="/createRestaurants" render={(props) => <CreateRestaurants {...props}  getData={this.getData}/>} />

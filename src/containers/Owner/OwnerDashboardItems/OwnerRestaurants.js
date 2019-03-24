@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import RestaurantsCard from '../../../components/restaurantCards/resturantItem'
+import ReviewCard from '../../../components/reviewCards/reviewItem'
 import {Grid} from 'semantic-ui-react'
 
 class OwnerRestaurants extends Component{
@@ -7,12 +8,13 @@ class OwnerRestaurants extends Component{
         super()
         this.state = {
           ownerRestaurants: [],
+          allReviews: []
         };
       }
       
       componentDidMount() {
         this.getUserRestaurants();
-        console.log(this.props);
+        this.getRestaurantReviews();
       }
       
       getUserRestaurants(){
@@ -34,6 +36,19 @@ class OwnerRestaurants extends Component{
     });
     }
 
+
+    getRestaurantReviews(){
+        fetch('https://review-website-api.herokuapp.com/restaurant/reviews/' + localStorage.getItem('id') ).then(res => res.json())
+        .then(data => {
+            console.log(data);
+            this.setState({
+                allReviews: data.rows
+            })
+        }).catch(err => {
+          console.log(err);
+    });
+      }
+
     createOne = () => {
         this.props.history.replace('/createRestaurants')
     }
@@ -47,7 +62,18 @@ class OwnerRestaurants extends Component{
                 category={item.category}
                 address={item.address}
                 postcode={item.postcode}
+                rating={item.avgrating}
+            />
+        ));
+
+
+        const reviews = this.state.allReviews.map(item => (
+            <ReviewCard
+                key={item.review_id}
+                name={item.name}
+                description={item.review_text}
                 rating={item.rating}
+                updated={item.updated_at}
             />
       ));
 
@@ -58,6 +84,16 @@ class OwnerRestaurants extends Component{
             <Grid>
                 <Grid.Row>
                 {restaurants}
+                </Grid.Row>
+            </Grid>
+        </div>
+
+
+        <div>
+            <h1>Your Restaurants review</h1>
+            <Grid>
+                <Grid.Row>
+                {reviews}
                 </Grid.Row>
             </Grid>
         </div>
