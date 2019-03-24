@@ -55,7 +55,7 @@ class CreateRestaurants extends Component {
                 <Form.Input value={this.state.postcode} onChange={(event) => this.setState({postcode: event.target.value})} icon='map marker' iconPosition='left' label='Postcode' placeholder='postcode' />
                 <Form.Input value={this.state.category} onChange={(event) => this.setState({category: event.target.value})} icon='tags' iconPosition='left' label='Category' placeholder='category' />
                 <Form.Input value={this.state.description} onChange={(event) => this.setState({description: event.target.value})} icon='book' iconPosition='left' label='Description' placeholder='description' />
-            <Button onClick={this.handleSubmit} type='submit'>Submit</Button>
+            <Button onClick={this.handleSubmit} type='submit' primary>Create</Button>
             <p>{this.state.message}</p>
           </Form>
         )
