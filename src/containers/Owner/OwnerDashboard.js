@@ -38,7 +38,6 @@ class OwnerDashboard extends Component{
     this.setState({ activeItem: name })
 
     render(){
-      {console.log(this.state.restaurantData);}
         const panes = [
             { menuItem: 'Your restaurants', render: () => <Tab.Pane><OwnerRestaurants getRestaurantData={this.getRestaurantData} /></Tab.Pane> },
             { menuItem: 'Create new Restaurant', render: () => <Tab.Pane><CreateRestaurants data={this.state.data} /></Tab.Pane> },

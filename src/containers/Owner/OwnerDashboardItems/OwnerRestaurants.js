@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import RestaurantsCard from '../../../components/restaurantCards/resturantItem'
-import {Grid, Button} from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 
 class OwnerRestaurants extends Component{
     constructor(){

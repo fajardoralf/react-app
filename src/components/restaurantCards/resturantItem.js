@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Rating } from 'semantic-ui-react'
+import { Card, Rating } from 'semantic-ui-react'
 
 const restaurantCard = (props) => {
 
