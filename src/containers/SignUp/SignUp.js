@@ -31,9 +31,9 @@ class SignUp extends Component {
        method: 'post',
        headers: {'Content-Type':'application/json'},
        body: JSON.stringify({
-        "username": this.state.username,
-        "password": this.state.password,
-        "email": this.state.email,
+        "username": this.state.username.toLowerCase(),
+        "password": this.state.password.toLowerCase(),
+        "email": this.state.email.toLowerCase(),
         "role": this.state.roleValue,
         "active": 1
        })
