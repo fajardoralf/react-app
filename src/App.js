@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import SignIn from './containers/SignIn/SingIn';
 import SignUp from './containers/SignUp/SignUp';
+import Home from './containers/Home/Home'
 import UserDashBoard from './containers/User/UserDashBoard';
 import OwnerDashboard from './containers/Owner/OwnerDashboard';
 import CreateRestaurants from './containers/Owner/OwnerDashboardItems/CreateRestaurants';
 
-import { Menu } from 'semantic-ui-react'
+import { Menu, Container } from 'semantic-ui-react'
 import {Route} from 'react-router';
 import {BrowserRouter, Link} from 'react-router-dom';
 
@@ -55,8 +57,10 @@ class App extends Component {
     
     <Menu.Item name='Home' 
     active={activeItem === 'Home'} 
-    onClick={this.handleItemClick}>
-      
+    onClick={this.handleItemClick}
+    as={Link} to ='/home'
+    >
+    
     </Menu.Item>
 
     <Menu.Item
@@ -117,16 +121,17 @@ class App extends Component {
     return (
       
       <BrowserRouter>
-      <div>
+      <Container>
       <ul className="header">{nav}</ul>
       <div className="content">
       <Route exact path="/signIn" render={(props) => <SignIn {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/signUp" render={(props) => <SignUp {...props}  />} />
+      <Route exact path="/home" render={(props) => <Home {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/userDashboard" render={(props) => <UserDashBoard {...props} getData={this.getData} />} />
       <Route exact path="/ownerDashboard" render={(props) => <OwnerDashboard {...props}  getData={this.getData}/>} />
       <Route exact path="/ownerDashboard/CreateRestaurants" render={(props) => <CreateRestaurants {...props}  getData={this.getData}/>} />
       </div>
-    </div>
+      </Container>
     </BrowserRouter>
     );
   }
