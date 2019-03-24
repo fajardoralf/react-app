@@ -12,14 +12,12 @@ class CreateReview extends Component {
         }
     }
 
-
     componentDidMount(){
         fetch('https://review-website-api.herokuapp.com/restaurant/').then(res => res.json())
         .then(data => {
             let result =  data.rows.map((value) => {
                 return ({key: value.restaurant_id, value: value.restaurant_id, text: value.name })
             })
-
             this.setState({
                 roleOptions: result
             })
@@ -53,7 +51,7 @@ class CreateReview extends Component {
             if(res.status === 201){
                 this.setState({message: 'Your review was posted'});
             }else{
-                this.setState({message: 'Something went wrong'})
+                this.setState({message: 'Something went wrong! You must fill all the fields.'})
             }
           })
           .catch(err => {

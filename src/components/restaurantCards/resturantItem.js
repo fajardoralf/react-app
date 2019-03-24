@@ -10,7 +10,7 @@ const restaurantCard = (props) => {
                                     width="auto" 
                                     height="290px" 
                                     id="gmap_canvas" 
-                                    src={"https://maps.google.com/maps?q=" + props.address + ", " + props.postcode + "&t=&z=13&ie=UTF8&iwloc=&output=embed"} 
+                                    src={"https://maps.google.com/maps?q=" + props.address + "&t=&z=13&ie=UTF8&iwloc=&output=embed"} 
                                     frameBorder="0" 
                                     scrolling="no" 
                                     marginHeight="0" 

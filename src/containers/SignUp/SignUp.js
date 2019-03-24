@@ -40,7 +40,8 @@ class SignUp extends Component {
       })
       .then((res) => {
           if(res.status === 201){
-              this.setState({message: "Registred completed"})
+              this.setState({message: "Registred completed"});
+              this.props.history.replace('/signIn');
           }else{
               this.setState({message: "The username or email is already in use"})
           }
@@ -63,7 +64,8 @@ class SignUp extends Component {
             <Form.Input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})} icon='lock' iconPosition='left' label='Password' placeholder='Password' type='password' />
             <h5>Role</h5>
             <Select onChange={this.onRolePick} placeholder='Select your role' label='Role' options={this.state.roleOptions} />
-            <Button onClick={this.handleSubmit} content='Login' primary />
+            <br /><br />
+            <Button onClick={this.handleSubmit} content='Sign Up' primary />
                 <p>{this.state.message}</p>
           </Form>
         </Grid.Column>
@@ -71,7 +73,6 @@ class SignUp extends Component {
           <Button onClick={this.onButtonClick} content='Sign In' icon='signup' size='big' />
         </Grid.Column>
       </Grid>
-  
       <Divider vertical>Or</Divider>
     </Segment>
     );

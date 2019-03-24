@@ -10,6 +10,7 @@ class SignIn extends Component {
             password: "",
             role: "",
             activeItem: "",
+            message: "",
             data: []
         }
     }
@@ -28,9 +29,16 @@ class SignIn extends Component {
             }
         })
         .then((res)=> {
-            return res.json();
+            if(res.status === 200){
+              this.setState({message: "Login success"});
+              return res.json();
+            }else{
+              this.setState({message: "Wrong username or password"});
+              return;
+            }
         })
         .then(data =>{
+            console.log(data);
             localStorage.setItem('token',data.accessToken);
             localStorage.setItem('id', data.id);
             localStorage.setItem('role', data.role);
@@ -44,7 +52,6 @@ class SignIn extends Component {
         })
         .catch(err => {
             console.log(err);
-            alert('error logging in please try again');
         });
     }
 
@@ -66,6 +73,7 @@ class SignIn extends Component {
             <Form.Input value={this.state.userName} onChange={(event) => this.setState({username: event.target.value})} icon='user' iconPosition='left' label='Username' placeholder='username' />
             <Form.Input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})} icon='lock' iconPosition='left' label='Password' type='password' placeholder='password' />
             <Button onClick={this.onSubmitSignIn} content='Login' primary />
+            <p>{this.state.message}</p>
           </Form>
         </Grid.Column>
   

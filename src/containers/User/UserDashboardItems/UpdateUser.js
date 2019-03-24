@@ -41,7 +41,7 @@ class UpdateUser extends Component {
             if(res.status === 201){
                 this.setState({message: 'Updated Your User'});
             }else{
-                this.setState({message: 'Something went wrong'})
+              this.setState({message: 'Something went wrong! You must fill all the fields.'})
             }
           })
           .catch(err => {

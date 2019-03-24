@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeItem: "",
+      activeItem: "Home",
       id: 0,
       role: 0,
       token: '',
@@ -35,7 +35,7 @@ class App extends Component {
   this.setState({ activeItem: name })
 
   handleLogOut = () => {
-    this.setState({role: 0})
+    this.setState({role: 0, activeItem: "Sign In"})
   }
 
   getData = () => {
@@ -55,10 +55,11 @@ class App extends Component {
     >
     </Menu.Item>
     
-    <Menu.Item name='Home' 
+    <Menu.Item
+    as={Link} to='/' 
+    name='Home' 
     active={activeItem === 'Home'} 
     onClick={this.handleItemClick}
-    as={Link} to ='/home'
     >
     
     </Menu.Item>
@@ -74,7 +75,9 @@ class App extends Component {
     if(parseInt(this.state.role) === 1) {
       nav = (
         <Menu>
-      <Menu.Item name='Home' 
+      <Menu.Item
+      as={Link} to='/' 
+      name='Home' 
       active={activeItem === 'Home'} 
       onClick={this.handleItemClick}>
       </Menu.Item>
@@ -98,7 +101,8 @@ class App extends Component {
     else if(parseInt(this.state.role) === 2){
       nav = (
         <Menu>
-        <Menu.Item name='Home' 
+        <Menu.Item name='Home'
+        as={Link} to='/'  
         active={activeItem === 'Home'} 
         onClick={this.handleItemClick} />
 
@@ -126,10 +130,10 @@ class App extends Component {
       <div className="content">
       <Route exact path="/signIn" render={(props) => <SignIn {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/signUp" render={(props) => <SignUp {...props}  />} />
-      <Route exact path="/home" render={(props) => <Home {...props} handleChanged={this.handleChanged} />} />
+      <Route exact path="/" render={(props) => <Home {...props} handleChanged={this.handleChanged} />} />
       <Route exact path="/userDashboard" render={(props) => <UserDashBoard {...props} getData={this.getData} />} />
       <Route exact path="/ownerDashboard" render={(props) => <OwnerDashboard {...props}  getData={this.getData}/>} />
-      <Route exact path="/ownerDashboard/CreateRestaurants" render={(props) => <CreateRestaurants {...props}  getData={this.getData}/>} />
+      <Route exact path="/createRestaurants" render={(props) => <CreateRestaurants {...props}  getData={this.getData}/>} />
       </div>
       </Container>
     </BrowserRouter>
