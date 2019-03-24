@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { Tab } from 'semantic-ui-react';
 
 import UpdateUser from './UserDashboardItems/UpdateUser';
+import CreateReview from './UserDashboardItems/CreateReview';
 
 class UserDashBoard extends Component{
     constructor(props){
@@ -32,7 +33,7 @@ class UserDashBoard extends Component{
 
     render(){
         const panes = [
-            { menuItem: 'Start a review', render: () => <Tab.Pane>Start a review</Tab.Pane> },
+            { menuItem: 'Start a review', render: () => <Tab.Pane><CreateReview /></Tab.Pane> },
             { menuItem: 'Update Your Information', render: () => <Tab.Pane><UpdateUser data={this.state.data}/></Tab.Pane> },
             { menuItem: 'Recent Reviews', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
           ]

@@ -16,10 +16,6 @@ class UpdateUser extends Component {
         }
     }
 
-    componentWillMount(){
-        console.log(this.props.data[0].username);
-    }
-
     handleSubmit = event => {
         event.preventDefault();
     
